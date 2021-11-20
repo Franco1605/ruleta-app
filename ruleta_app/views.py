@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
 from .models import Player
 from .forms import RegistrationForm, EdicionForm
+from .tasks import my_first_task
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -71,3 +73,8 @@ def edicion_jugador(request, id):
 def eliminar_jugador(request, id):
     Player.objects.filter(id=id).delete()
     return redirect("/jugadores/")
+
+
+def prueba(request):
+    my_first_task.delay(50)
+    return HttpResponse("Response done")
