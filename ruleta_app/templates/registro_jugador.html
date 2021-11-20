@@ -1,0 +1,29 @@
+{% block content %}
+
+<body>
+  <div class='panel_trasero'>
+    <div class='contenedor_form'>
+      
+      <div class='titular_form'>
+        <div id='titulo'>Registro</div>
+        <div id='subtitulo'>Crea un nuevo jugador</div>
+      </div>
+      
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in registration_form%}
+          <div class='field'>
+            {{field}}
+          </div>
+            
+            {% if field.help_text %}
+              <small>{{field.help_text}}</small>
+            {%endif%}
+        {%endfor%}
+        <button type="submit">Crear Jugador</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

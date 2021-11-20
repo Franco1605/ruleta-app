@@ -1,0 +1,29 @@
+{% block content %}
+
+<body>
+  <div class='panel_trasero'>
+    <div class='contenedor_form'>
+      
+      <div class='titular_form'>
+        <div id='titulo'>Edición</div>
+        <div id='subtitulo'>Edición de campos</div>
+      </div>
+      
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in edicion_form%}
+          <div class='field'>
+            {{field}}
+          </div>
+            
+            {% if field.help_text %}
+              <small>{{field.help_text}}</small>
+            {%endif%}
+        {%endfor%}
+        <button type="submit">Guardar cambios</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+{% endblock %}

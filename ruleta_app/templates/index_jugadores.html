@@ -1,0 +1,39 @@
+{% block content %}
+
+    <div class="body-table">
+        <div class="primary-header">
+            <div id="title" class="element">
+                <h1>Jugadores</h1>
+            </div>
+            <div id="new-player" class="element">
+                <p><a href="{% url 'registro_jugador' %}">Crear nuevo Jugador</a></p>
+            </div>
+        </div>
+        
+        <table class='general'>
+            <tr>
+            <th>Nombre Jugador</th>
+            <th>Dinero actual</th>
+            <th>Perfil</th>
+            <th>Acción</th>
+            </tr>
+            {% for jugador in jugadores %}
+                <tr class="data">
+                    <td>{{jugador.nombre }}</td>
+                    <td>{{jugador.dinero}}</td>
+                    <td><a href="{% url 'show_jugador' id=jugador.id %}">Ver perfil</a></td>
+                    <td><a href="{% url 'eliminar_jugador' id=jugador.id %}">Eliminar</a></td></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <div class="footer-tabla">
+            {% if jugadores.has_previous %}
+                <a id="previous-page" href="{% url 'jugadores' %}?page={{jugadores.previous_page_number}}">Página anterior</a>
+            {% endif %}
+            {% if jugadores.has_next %}
+                <a id="next-page" href="{% url 'jugadores' %}?page={{jugadores.next_page_number}}">Página siguiente</a>
+            {% endif %}
+        </div>
+    </div>
+    
+{% endblock %}
