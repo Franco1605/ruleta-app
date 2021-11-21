@@ -1,10 +1,34 @@
 
 {%block content%}
 <h1>Bienvenido al casino Balloon</h1>
-
-<h2>Partidas transcurridas</h2>
-<div >
+<div>
     <p><a href="{% url 'jugadores' %}">Ver jugadores</a></p>
 </div>
+<h2>Partidas transcurridas</h2>
+{% for ronda in rondas %}
+    Fecha y hora: {{ronda.fecha}}
+    Color Obtenido: {{ronda.color_ronda}}
+    <table>
+        <tr>
+            <th>Nombre jugador</th>
+            <th>Color Apostado</th>
+            <th>Porcentaje de apuesta</th>
+            <th>Apuesta ($)</th>
+            <th>Ganancia ($)</th>
+            <th>Estado</th>
+        </tr>
+        {% for jugador in ronda.jugadores.jugadores%}
+            <tr class="data">
+                <td>{{jugador.nombre}}</td>
+                <td>{{jugador.color_apostado}}</td>
+                <td>{{jugador.porcentaje_apuesta}}</td>
+                <td>{{jugador.apuesta}}</td>
+                <td>{{jugador.ganancia}}</td>
+                <td>{{jugador.estado}}</td>
+            </tr>
+        {%endfor%}
+    </table>
+{% endfor %}
+
 
 {%endblock%}

@@ -1,15 +1,18 @@
+from django.http.response import ResponseHeaders
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage
-from .models import Player
+from .models import Player, Round
 from .forms import RegistrationForm, EdicionForm
-from .tasks import my_first_task
 from django.http import HttpResponse
 
 # Create your views here.
 
 ## Vista inicial, que contendrá los registros de la ruleta
 def home(request):
-    return render(request, "home.html")
+    context={}
+    rondas = Round.objects.all()
+    context["rondas"] = rondas
+    return render(request, "home.html", context)
 
 ## Controlador correspondiente a al index de jugadores
 def jugadores(request):
@@ -40,6 +43,9 @@ def registro_jugador(request):
             context['registration_form'] = form
     else:
         form = RegistrationForm(initial={
+            "ultimo_color_apostado":"-",
+            "ultimo_dinero_apostado":0,
+            "ultimo_dinero_ganado":0,
             "dinero":10000,
         })
         context['registration_form'] = form
@@ -73,8 +79,3 @@ def edicion_jugador(request, id):
 def eliminar_jugador(request, id):
     Player.objects.filter(id=id).delete()
     return redirect("/jugadores/")
-
-
-def prueba(request):
-    my_first_task.delay(50)
-    return HttpResponse("Response done")
