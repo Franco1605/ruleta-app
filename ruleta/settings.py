@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 import environ
 
 env=environ.Env()
@@ -29,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://ruleta-bl.herokuapp.com']
 
 
 # Application definition
@@ -145,3 +146,7 @@ CELERY_TIMEZONE = 'America/Santiago'
 
 
 API_KEY =env('API_KEY')
+
+
+
+django_heroku.settings(locals())
