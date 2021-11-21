@@ -20,7 +20,6 @@ django-timezone-field==4.2.1
 idna==3.3
 importlib-metadata==4.8.2
 kombu==5.1.0
-pkg-resources==0.0.0
 prompt-toolkit==3.0.22
 psycopg2==2.9.2
 python-crontab==2.6.0
