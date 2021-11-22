@@ -17,7 +17,7 @@ app.conf.beat_schedule = {
     },
     'at-end-day':{
         'task':'ruleta_app.tasks.reponer_dinero',
-        'schedule': crontab(hour=0, minute=00),
+        'schedule': crontab(hour=23, minute=59),
     }
     
 }
